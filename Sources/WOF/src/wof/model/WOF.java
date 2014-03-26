@@ -29,10 +29,12 @@ public class WOF extends Application {
             }
         });
         
+        //Wheel w = new Wheel();
         StackPane root = new StackPane();
         root.getChildren().add(btn);
+        //root.getChildren().add(w);
         
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 600, 600);
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
