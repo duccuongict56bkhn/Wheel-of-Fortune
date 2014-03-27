@@ -28,6 +28,9 @@ public class Wheel extends Group {
      * Radius of the wheel
      */
     private double radius;
+    
+    private double height;
+    private double width; 
     /**
      * Background image of the wheel
      */
@@ -70,14 +73,17 @@ public class Wheel extends Group {
     }
     
     public Wheel() {
+        height = 600.0;
+        width = 600.0;
         rotateTime = 5;
         decreaseAcc = 2;
-        setBackgroundImage();
+        setBackgroundImage();     
         radius = 300;
     }
     
     /**
      * Set parent node
+     * @param node
      */
     public void setParentNode(Node node) {
         parentNode = node;
@@ -85,14 +91,19 @@ public class Wheel extends Group {
     
     /**
      * Get parent Scene Graph Node that contains this wheel
+     * @return 
      */
     public Node getParentNode() {
         return parentNode;
     }
     
     public final void setBackgroundImage() {
-        Image im = new Image(this.getClass().getResourceAsStream("Wheel.png").toString());
-        bgImageView.setImage(im);
+        Image img = new Image(getClass().getResource("Wheel.png").toExternalForm());
+        bgImageView = new ImageView(img);
+        bgImageView.setFitHeight(this.height);
+        bgImageView.setFitWidth(this.width);
+        bgImageView.setPreserveRatio(true);
+                
         this.getChildren().add(bgImageView);
     }
 
