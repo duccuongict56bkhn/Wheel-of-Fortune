@@ -5,11 +5,8 @@
 package wof.model;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -19,23 +16,14 @@ import javafx.stage.Stage;
 public class WOF extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
+    public void start(Stage primaryStage) {        
         Wheel w = new Wheel();
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        root.getChildren().add(w);
+        BorderPane root = new BorderPane();
+        root.setId("root");
+        //root.getChildren().add(w);
+        root.setRight(w);
         
-        Scene scene = new Scene(root, 600, 600);
-        
+        Scene scene = new Scene(root, 1200, 680);
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
