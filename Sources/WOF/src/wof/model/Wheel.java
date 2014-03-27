@@ -7,6 +7,8 @@
 
 package wof.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -14,9 +16,9 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 /**
@@ -24,7 +26,7 @@ import javafx.util.Duration;
  * @author duc cuong
  */
 
-public class Wheel extends StackPane {
+public class Wheel extends Parent {
 
     /**
      * Angle in degree corresponds to each piece of the wheel
@@ -55,15 +57,21 @@ public class Wheel extends StackPane {
     private Timeline timeline;
     
     // temps
+    /**
+     * Use array with only 1 element to prevent compilation error
+     * "Local variable accessed with inner class, need to be declared final"
+     */
     private double[] startAngle = {0};
-    private double[] endAngle = {305};
+    private double[] endAngle = {317};
   
     private final int cycle = 1;
     /**
      * The parent node that contains this wheel
      */
     private Node parentNode;
-    
+
+    private Map<String, String> value = new HashMap<String, String>();
+
     /**
      * Wheel status
      */
@@ -72,6 +80,8 @@ public class Wheel extends StackPane {
         HOLDING,
         STOP
     }
+    
+    private Status status;
     
     /**
      * Direction for rotation of wheel. It's determined by the mouse
@@ -92,8 +102,27 @@ public class Wheel extends StackPane {
         setBackgroundImage();     
         radius = 300;
         this.setId("wheel");
+        status = Status.STOP;
+        setListOfValue();
     }
     
+    public void setListOfValue() {
+        value.put("24", "BANKRUPT");
+        value.put("48", "700");
+        value.put("72", "200");
+        value.put("96", "100");
+        value.put("120", "HAVLE");   // chia đôi
+        value.put("144", "800");
+        value.put("168", "300");
+        value.put("192", "GIFT");
+        value.put("216", "600");
+        value.put("240", "LOSETURN");
+        value.put("264", "400");
+        value.put("288", "DOUBLE");
+        value.put("312", "500");
+        value.put("336", "BONUSTURN");
+        value.put("360", "900");
+    }
     /**
      * Set parent node
      * @param node
@@ -142,15 +171,22 @@ public class Wheel extends StackPane {
         );
         //this.getChildren().add(bgImageView);
         timeline.play();
+        status = Status.SPINNING;
+        System.out.println(status);
+        
         timeline.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent ae) {
+                status = Status.STOP;
+                System.out.println(status);
                 startAngle[0] = endAngle[0];
                 endAngle[0] = endAngle[0] * 1.8;
-                if (endAngle[0] > startAngle[0] * 4) {
+                if (endAngle[0] > 317 *10) {
                     startAngle[0] = 0;
-                    endAngle[0] = 305;
+                    endAngle[0] = 317;
                 }
+                // debug
+                System.out.println("S: " + startAngle[0] + " , E:" + endAngle[0]);
             }
         });
     }
