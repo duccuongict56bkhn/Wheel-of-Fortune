@@ -29,10 +29,10 @@ public class WOF extends Application {
             }
         });
         
-        //Wheel w = new Wheel();
+        Wheel w = new Wheel();
         StackPane root = new StackPane();
         root.getChildren().add(btn);
-        //root.getChildren().add(w);
+        root.getChildren().add(w);
         
         Scene scene = new Scene(root, 600, 600);
         
