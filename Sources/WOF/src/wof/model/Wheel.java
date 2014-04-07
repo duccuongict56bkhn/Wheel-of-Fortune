@@ -16,9 +16,9 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 /**
@@ -26,7 +26,7 @@ import javafx.util.Duration;
  * @author duc cuong
  */
 
-public class Wheel extends Parent {
+public class Wheel extends StackPane {
 
     /**
      * Angle in degree corresponds to each piece of the wheel
@@ -95,8 +95,8 @@ public class Wheel extends Parent {
     }
     
     public Wheel() {
-        height = 700.0;
-        width = 700.0;
+        height = 600.0;
+        width = 600.0;
         rotateTime = 5;
         decreaseAcc = 2;
         setBackgroundImage();     
@@ -195,7 +195,7 @@ public class Wheel extends Parent {
     public void setHeight(double height) {
         super.setHeight(height);
     }
-    
+
     @Override
     public void setWidth(double width) {
         super.setHeight(width);
